@@ -5,7 +5,9 @@ config();
 export const SETTINGS = {
     PORT: process.env.PORT || 3000,
     PATH: {
-
+        BLOGS: '/ht_02/api/blogs',
+        POSTS: '/ht_02/api/posts',
+        ALL_DELETE: '/ht_02/api/testing'
     }
 }
 
