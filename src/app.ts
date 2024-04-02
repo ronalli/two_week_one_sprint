@@ -1,5 +1,6 @@
 import express from "express";
-import {HTTP_STATUSES} from "./settings";
+import {HTTP_STATUSES, SETTINGS} from "./settings";
+import {blogsRouter} from "./routes/blogs-router";
 
 export const app = express();
 
@@ -10,3 +11,5 @@ app.get('/', (req, res) => {
         message: "super"
     })
 })
+
+app.use(SETTINGS.PATH.BLOGS, blogsRouter)

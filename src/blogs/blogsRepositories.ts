@@ -17,13 +17,13 @@ export const blogsRepositories = {
         return db.blogs.find(b => b.id === id);
     },
     findAllBlogs: () => {
-        return db.blogs;
+        return db.blogs
     },
     updateBlog: (id: string, inputUpdateDataBlog: BodyTypeBlog) => {
         const {name, websiteUrl, description} = inputUpdateDataBlog
 
-        const findBlog =  db.blogs.find(b => b.id === id);
-        if(findBlog) {
+        const findBlog = db.blogs.find(b => b.id === id);
+        if (findBlog) {
             findBlog.name = name;
             findBlog.websiteUrl = websiteUrl;
             findBlog.description = description;
@@ -31,7 +31,12 @@ export const blogsRepositories = {
         return true;
     },
     deleteBlog: (id: string) => {
-        const deleteBlog = db.blogs.filter(b => b.id !== id);
-        return !!deleteBlog;
+
+        const flag = db.blogs.find(b => b.id === id)
+        if (!flag) {
+            return false;
+        }
+        db.blogs = db.blogs.filter(b => b.id !== id);
+        return true;
     },
 }

@@ -44,8 +44,10 @@ export const blogsControllers = {
         const {id} = req.params;
         const flag = blogsRepositories.deleteBlog(id);
         if(flag) {
-            res.status(HTTP_STATUSES.NOT_FOUND_404).send({})
+            res.status(HTTP_STATUSES.NO_CONTENT_204).send({})
+            return
         }
         res.status(HTTP_STATUSES.NOT_FOUND_404).send({})
+        return
     },
 }
