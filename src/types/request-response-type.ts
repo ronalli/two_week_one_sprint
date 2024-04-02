@@ -2,8 +2,14 @@ export type ParamType = {
     id: string
 }
 
-export type BodyType = {
+export type BodyTypePost = {
 
+}
+
+export type BodyTypeBlog = {
+    name: string,
+    description: string,
+    websiteUrl: string,
 }
 
 export type QueryType = {
