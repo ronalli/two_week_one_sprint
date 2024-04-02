@@ -19,8 +19,19 @@ export const blogsRepositories = {
     findAllBlogs: () => {
         return db.blogs;
     },
-    updateBlog: () => {
+    updateBlog: (id: string, inputUpdateDataBlog: BodyTypeBlog) => {
+        const {name, websiteUrl, description} = inputUpdateDataBlog
+
+        const findBlog =  db.blogs.find(b => b.id === id);
+        if(findBlog) {
+            findBlog.name = name;
+            findBlog.websiteUrl = websiteUrl;
+            findBlog.description = description;
+        }
+        return true;
     },
     deleteBlog: (id: string) => {
+        const deleteBlog = db.blogs.filter(b => b.id !== id);
+        return !!deleteBlog;
     },
 }
