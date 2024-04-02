@@ -1,4 +1,5 @@
 import {Request, Response} from 'express'
+
 import {HTTP_STATUSES} from "../settings";
 
 export const postsControllers = {

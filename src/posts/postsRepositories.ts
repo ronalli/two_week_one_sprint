@@ -7,6 +7,6 @@ export const postsRepositories = {
     },
     updatePost: () => {
     },
-    deletePost: () => {
+    deletePost: (id: string) => {
     },
 }
