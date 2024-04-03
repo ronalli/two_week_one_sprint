@@ -3,13 +3,16 @@ export type ParamType = {
 }
 
 export type BodyTypePost = {
-
+    title: string
+    shortDescription: string
+    content: string
+    blogId: string
 }
 
 export type BodyTypeBlog = {
-    name: string,
-    description: string,
-    websiteUrl: string,
+    name: string
+    description: string
+    websiteUrl: string
 }
 
 export type QueryType = {
