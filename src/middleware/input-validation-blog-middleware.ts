@@ -15,7 +15,7 @@ const validatorDescription = body('description').trim().notEmpty().withMessage('
 const validationWebsiteUrl = body('websiteUrl').trim().notEmpty().withMessage('Field websiteUrl is empty').isLength({
     min: 7,
     max: 100
-}).custom((value, {req}) => {
+}).custom((value) => {
     const regexp = new RegExp('^https:\/\/([a-zA-Z0-9_-]+\.)+[a-zA-Z0-9_-]+(\/[a-zA-Z0-9_-]+)*\/?$', 'g');
     return regexp.test(value);
 }).withMessage('Field is not correct url');
@@ -23,7 +23,7 @@ const validationWebsiteUrl = body('websiteUrl').trim().notEmpty().withMessage('F
 
 export const validationCreateBlog = [validationTitle, validatorDescription, validationWebsiteUrl];
 
-export const inputValidationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const inputValidationBlogMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req).array({onlyFirstError: true});
     if (errors.length > 0) {
         res.status(HTTP_STATUSES.BED_REQUEST_400).send(errors)

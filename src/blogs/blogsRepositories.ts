@@ -14,7 +14,7 @@ export const blogsRepositories = {
 
     },
     findBlogById: (id: string) => {
-        return db.blogs.find(b => b.id === id);
+        return db.blogs.find(b => b.id === id) || false;
     },
     findAllBlogs: () => {
         return db.blogs
