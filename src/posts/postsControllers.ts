@@ -19,7 +19,11 @@ export const postsControllers = {
     getPost: (req: Request, res: Response) => {
         const {id} = req.params as ParamType;
         const findPost = postsRepositories.findPostById(id)
-        res.status(HTTP_STATUSES.OK_200).send(findPost)
+        if (findPost !== undefined) {
+            res.status(HTTP_STATUSES.OK_200).send(findPost)
+            return
+        }
+        res.status(HTTP_STATUSES.NOT_FOUND_404).send({})
         return
     },
     getPosts: (req: Request, res: Response) => {
@@ -30,7 +34,7 @@ export const postsControllers = {
         const {id} = req.params as ParamType;
         const updateDataPost = req.body as BodyTypePost;
         const flag = postsRepositories.updatePost(id, updateDataPost)
-        if(flag) {
+        if (flag) {
             res.status(HTTP_STATUSES.CREATED_201).send({})
             return
         }
@@ -40,7 +44,7 @@ export const postsControllers = {
     deletePost: (req: Request, res: Response) => {
         const {id} = req.params as ParamType;
         const flag = postsRepositories.deletePost(id);
-        if(flag) {
+        if (flag) {
             res.status(HTTP_STATUSES.NO_CONTENT_204).send({});
             return;
         }

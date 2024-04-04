@@ -7,7 +7,7 @@ import {blogsRepositories} from "../blogs/blogsRepositories";
 
 export const postsRepositories = {
     findPostById: (id: string) => {
-        return db.blogs.find(b => b.id === id);
+        return db.posts.find(b => b.id === id);
     },
     findAllPosts: () => {
         return db.posts;
