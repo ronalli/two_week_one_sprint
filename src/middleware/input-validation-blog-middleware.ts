@@ -23,12 +23,4 @@ const validationWebsiteUrl = body('websiteUrl').trim().notEmpty().withMessage('F
 
 export const validationCreateBlog = [validationTitle, validatorDescription, validationWebsiteUrl];
 
-export const inputValidationBlogMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const errors = validationResult(req).array({onlyFirstError: true});
-    if (errors.length > 0) {
-        res.status(HTTP_STATUSES.BED_REQUEST_400).send(errors)
-        return;
-    }
-    next();
-}
 
