@@ -26,8 +26,9 @@ export const blogsRepositories = {
             findBlog.name = name;
             findBlog.websiteUrl = websiteUrl;
             findBlog.description = description;
+            return true;
         }
-        return true;
+        return false;
     },
     deleteBlog: (id: string) => {
 

@@ -12,6 +12,6 @@ postsRouter.get('/:id', postsControllers.getPost)
 
 postsRouter.post('/', authMiddleware, ...validationCreatePost, inputCheckErrorsMiddleware, postsControllers.createPost)
 
-postsRouter.put('/', authMiddleware, ...validationCreatePost, inputCheckErrorsMiddleware, postsControllers.updatePost)
+postsRouter.put('/:id', authMiddleware, ...validationCreatePost, inputCheckErrorsMiddleware, postsControllers.updatePost)
 
-postsRouter.delete('/', authMiddleware, postsControllers.deletePost)
+postsRouter.delete('/:id', authMiddleware, postsControllers.deletePost)

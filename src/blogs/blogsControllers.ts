@@ -14,7 +14,7 @@ export const blogsControllers = {
             res.status(HTTP_STATUSES.CREATED_201).send(blog)
             return
         }
-        res.status(HTTP_STATUSES.NOT_FOUND_404).send({})
+        res.status(HTTP_STATUSES.BED_REQUEST_400).send({})
     },
     getBlog: (req: Request, res: Response) => {
         const {id}= req.params as ParamType;
@@ -39,6 +39,7 @@ export const blogsControllers = {
             return
         }
         res.status(HTTP_STATUSES.NOT_FOUND_404).send({})
+        return;
     },
     deleteBlog: (req: Request, res: Response) => {
         const {id} = req.params;

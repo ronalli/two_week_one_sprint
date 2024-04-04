@@ -6,14 +6,13 @@ import {PostDBType} from "../db/post-types-db";
 import {blogsRepositories} from "../blogs/blogsRepositories";
 
 export const postsRepositories = {
-    findPostById: (id: string) => {
+  findPostById: (id: string) => {
         return db.posts.find(b => b.id === id);
     },
     findAllPosts: () => {
         return db.posts;
     },
     createPost: (post: BodyTypePost) => {
-        // const {content, title, shortDescription, blogId} = post;
         const findBlog = blogsRepositories.findBlogById(post.blogId);
         let newPost: PostDBType;
         if(findBlog) {
@@ -29,11 +28,11 @@ export const postsRepositories = {
     },
     updatePost: (id: string, updatePost: BodyTypePost) => {
         const findPost = db.posts.find(p => p.id === id);
-        // const findBlog = db.blogs.find(b => b.id === updatePost.blogId);
         if(findPost) {
             findPost.title = updatePost.title
             findPost.content = updatePost.content
             findPost.shortDescription = updatePost.shortDescription
+            findPost.blogId = updatePost.blogId
             return true;
         }
         return false;

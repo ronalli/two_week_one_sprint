@@ -35,10 +35,10 @@ export const postsControllers = {
         const updateDataPost = req.body as BodyTypePost;
         const flag = postsRepositories.updatePost(id, updateDataPost)
         if (flag) {
-            res.status(HTTP_STATUSES.CREATED_201).send({})
+            res.status(HTTP_STATUSES.NO_CONTENT_204).send({})
             return
         }
-        res.status(HTTP_STATUSES.BED_REQUEST_400).send({})
+        res.status(HTTP_STATUSES.NOT_FOUND_404).send({})
         return;
     },
     deletePost: (req: Request, res: Response) => {

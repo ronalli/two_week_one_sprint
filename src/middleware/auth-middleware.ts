@@ -6,10 +6,11 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     const auth = req.headers.authorization;
     if(auth) {
         const token = Buffer.from(auth.slice(6), 'base64').toString();
+        const typeEncryption = auth.slice(0, 5);
         const [name, password] = token.split(':')
         const adminData = process.env.BASIC_TOKEN as string;
         const [basicName, basicPassword] = adminData.split(":");
-        if(name === basicName && password === basicPassword) {
+        if(name === basicName && password === basicPassword && typeEncryption === 'Basic') {
             next();
             return;
         } else {

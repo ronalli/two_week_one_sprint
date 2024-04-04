@@ -1,23 +1,17 @@
-import {Response, Request, NextFunction} from 'express'
-import {body, validationResult} from 'express-validator'
-import {HTTP_STATUSES} from "../settings";
-import {blogsControllers} from "../blogs/blogsControllers";
+import {body} from 'express-validator'
 import {blogsRepositories} from "../blogs/blogsRepositories";
 
 const validationTitle = body('title').trim().notEmpty().withMessage('Field title is empty').isLength({
-    min: 3,
     max: 30
-}).withMessage('Title filed should be from 3 to 15 symbols');
+}).withMessage('Title filed should be max 30 symbols');
 
 const validationShortDescription = body('shortDescription').trim().notEmpty().withMessage('Field shortDescription is empty').isLength({
-    min: 5,
     max: 100
-}).withMessage('ShortDescription filed should be from 5 to 100 symbols');
+}).withMessage('ShortDescription filed should be max 100 symbols');
 
 const validationContent = body('content').trim().notEmpty().withMessage('Field content is empty').isLength({
-    min: 20,
     max: 1000
-}).withMessage('Content filed should be from 20 to 1000 symbols')
+}).withMessage('Content filed should be max 1000 symbols')
 
 const validationBlogId = body('blogId').trim().notEmpty().withMessage('Field blogId is empty').isString().withMessage('Field blogId is not correct type').custom(value => {
     const isValidBlogId = blogsRepositories.findBlogById(value);

@@ -9,9 +9,7 @@ export const app = express();
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.status(HTTP_STATUSES.OK_200).send({
-        message: "super"
-    })
+    res.status(HTTP_STATUSES.OK_200).send({version: "1.0"})
 })
 
 app.use(SETTINGS.PATH.BLOGS, blogsRouter)
