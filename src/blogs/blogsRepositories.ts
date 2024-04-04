@@ -11,7 +11,6 @@ export const blogsRepositories = {
         }
         db.blogs = [...db.blogs, newBlog];
         return newBlog.id;
-
     },
     findBlogById: (id: string) => {
         return db.blogs.find(b => b.id === id) || false;

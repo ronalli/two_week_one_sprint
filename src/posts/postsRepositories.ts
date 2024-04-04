@@ -13,10 +13,9 @@ export const postsRepositories = {
         return db.posts;
     },
     createPost: (post: BodyTypePost) => {
-        const {content, title, shortDescription, blogId} = post;
-        const findBlog = blogsRepositories.findBlogById(blogId);
+        // const {content, title, shortDescription, blogId} = post;
+        const findBlog = blogsRepositories.findBlogById(post.blogId);
         let newPost: PostDBType;
-        console.log('posts-findblog', findBlog)
         if(findBlog) {
            newPost = {
                 ...post,
@@ -30,8 +29,8 @@ export const postsRepositories = {
     },
     updatePost: (id: string, updatePost: BodyTypePost) => {
         const findPost = db.posts.find(p => p.id === id);
-        const findBlog = db.blogs.find(b => b.id === updatePost.blogId);
-        if(findPost && findBlog) {
+        // const findBlog = db.blogs.find(b => b.id === updatePost.blogId);
+        if(findPost) {
             findPost.title = updatePost.title
             findPost.content = updatePost.content
             findPost.shortDescription = updatePost.shortDescription

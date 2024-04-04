@@ -10,6 +10,6 @@ postsRouter.get('/:id', postsControllers.getPost)
 
 postsRouter.post('/', ...validationCreatePost, validationPostMiddleware, postsControllers.createPost)
 
-postsRouter.put('/', postsControllers.updatePost)
+postsRouter.put('/', ...validationCreatePost, validationPostMiddleware, postsControllers.updatePost)
 
 postsRouter.delete('/', postsControllers.deletePost)
