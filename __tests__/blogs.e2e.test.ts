@@ -1,8 +1,7 @@
 import {req} from "./test-helpers";
 import {HTTP_STATUSES} from "../src/settings";
 import {SETTINGS} from "../src/settings";
-
-import {setBlogDB, setPostDB} from "../src/db/db";
+import {setBlogDB} from "../src/db/db";
 import {dataset} from "./dataset";
 import {describe} from "node:test";
 import {InputBlogType} from "../src/types/input-blog-type";
@@ -47,4 +46,41 @@ describe('/blogs', () => {
         }
         const res = await req.post(SETTINGS.PATH.BLOGS).set('Authorization', authHeader).send(newBlog).expect(HTTP_STATUSES.BED_REQUEST_400)
     });
+    it('shouldn\'t be create blog with authorization header, but not correct data: field websiteUrl does not match pattern', async () => {
+        const newBlog: InputBlogType = {
+            name: 'teerwer',
+            websiteUrl: 'http://it-incubator..com',
+            description: 'description'
+        }
+        const res = await req.post(SETTINGS.PATH.BLOGS).set('Authorization', authHeader).send(newBlog).expect(HTTP_STATUSES.BED_REQUEST_400)
+    });
+
+    it('shouldn\'t be create blog with authorization header, but data not found', async () => {
+        const res = await req.post(SETTINGS.PATH.BLOGS).set('Authorization', authHeader).send({}).expect(HTTP_STATUSES.BED_REQUEST_400)
+    });
+
+    it('shouldn\'t be create blog with authorization header, but not correct data: field websiteUrl does not match pattern', async () => {
+        const newBlog: InputBlogType = {
+            name: 'teerwer',
+            websiteUrl: 'http://it-incubator..com',
+            description: 'description'
+        }
+        const res = await req.post(SETTINGS.PATH.BLOGS).set('Authorization', authHeader).send(newBlog).expect(HTTP_STATUSES.BED_REQUEST_400)
+    });
+
+    it('shouldn\'t be create blog with authorization header, but not found one with field', async () => {
+        const newBlog = {
+            websiteUrl: 'http://it-incubator..com',
+            description: 'description'
+        }
+        const res = await req.post(SETTINGS.PATH.BLOGS).set('Authorization', authHeader).send(newBlog).expect(HTTP_STATUSES.BED_REQUEST_400)
+    });
+    it('shouldn\'t be create blog with authorization header, but not correct field: description, length more 500 symbol', async () => {
+        const newBlog = {
+            websiteUrl: 'http://it-incubator..com',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer scelerisque eros vel ex elementum, non aliquet diam iaculis. Ut vel justo egestas, facilisis orci sed, molestie nisl. Donec feugiat est eu arcu pulvinar, vitae venenatis sapien faucibus. Quisque malesuada vitae ligula ac fringilla. Aenean venenatis laoreet quam. Duis posuere metus ut sem porta cursus. Fusce a blandit neque, eu commodo purus. Nunc vehicula justo id posuere convallis. Sed pellentesque elementum lobortis. In consectetur quis ex nec porta. Proin sagittis eros quis semper rutrum. Nulla in scelerisque erat. Sed id suscipit turpis, id ultricies felis. Ut pretium velit libero, vel facilisis ante ullamcorper id. Mauris vitae tempor orci, nec convallis diam. Suspendisse potenti. Nunc convallis ac nulla ut imperdiet. Sed ac laoreet massa, non blandit lacus. Mauris luctus tortor velit, id posuere libero rutrum a. Nunc et tristique sem. Suspendisse consequat et ex ac maximus. Cras lacinia dictum nisl, pellentesque maximus ligula pretium vitae. Quisque venenatis massa tincidunt, molestie nulla vitae, sollicitudin odio. Praesent et gravida risus. Nunc sit amet ultrices felis, vitae malesuada nulla.'
+        }
+        const res = await req.post(SETTINGS.PATH.BLOGS).set('Authorization', authHeader).send(newBlog).expect(HTTP_STATUSES.BED_REQUEST_400)
+    });
+
 })
