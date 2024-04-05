@@ -16,7 +16,7 @@ export const setBlogDB = (dataset: BlogDBType[]) => {
     db.blogs = dataset
 }
 
-export  const setPostDB = (dataset: PostDBType[]) => {
+export  const setPostDB = (dataset?: PostDBType[]) => {
     if(!dataset) {
         db.posts = [];
         return;
